@@ -1,0 +1,5 @@
+workspace(name = "ceres_practice")
+
+load("//:repositories.bzl", "my_repositories")
+
+my_repositories()

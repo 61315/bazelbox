@@ -1,0 +1,2 @@
+Hello from r2.txt!
+This is a sample content.

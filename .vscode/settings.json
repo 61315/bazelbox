@@ -1,0 +1,13 @@
+{
+    "files.exclude": {
+        "**/bazel-*": true
+    },
+    "files.associations": {
+        "BUILD": "bazel",
+        "WORKSPACE": "bazel"
+    },
+    "bazel.buildFlags": [
+        "--verbose_failures"
+    ],
+    "bazel.enableCodeLens": true,
+}

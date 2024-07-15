@@ -1,0 +1,24 @@
+{
+    "folders": [
+        {
+            "path": "ceres"
+        },
+        {
+            "path": "flecs"
+        },
+        {
+            "path": "raylib"
+        },
+        {
+            "path": "loading-resources"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            // "**/bazel-*": true
+        },
+        "files.watcherExclude": {
+            "**/bazel-*/**": true
+        }
+    },
+}

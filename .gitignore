@@ -1,0 +1,94 @@
+# Bazel specific
+/bazel-*
+/bazel-bin
+/bazel-out
+/bazel-testlogs
+.bazelrc.local
+
+# Ignore all MODULE.bazel.lock files recursively
+**/MODULE.bazel.lock
+**/compile_commands.json
+
+# Ignore all .bazel-cache directories
+**/.bazel-cache
+
+# Compiled output
+*.o
+*.so
+*.a
+*.dylib
+*.dll
+*.exe
+
+# Dependency directories
+external/
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Temporary files
+*~
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+
+# Core dumps
+core
+
+# Build output directories
+/build/
+/bin/
+/out/
+
+# Generated protobuf files
+*.pb.cc
+*.pb.h
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.egg
+
+# Java
+*.class
+*.jar
+target/
+
+# C++
+*.gch
+*.pch
+
+# JavaScript/Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Miscellaneous
+.cache/
+.temp/
+*.bak

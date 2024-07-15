@@ -1,0 +1,5 @@
+filegroup(
+    name = "resources2",
+    srcs = glob(["**/*"]),
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,4 @@
+# this flag enables the platform specific configs like `build:windows`
+build --enable_platform_specific_config 
+
+build:windows --enable_runfiles

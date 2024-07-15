@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "bazel-build-current-file",
+			"type": "shell",
+			"command": "bazel",
+			"args": [
+				"build",
+				"-c",
+				"opt",
+				"//${relativeFileDirname}:${fileBasenameNoExtension}"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"windows": {
+				"args": [
+					"build",
+					"-c",
+					"opt",
+					"//${relativeFileDirname}:${fileBasenameNoExtension}"
+				]
+			},
+			"osx": {
+				"args": [
+					"build",
+					"-c",
+					"opt",
+					"//${relativeFileDirname}:${fileBasenameNoExtension}"
+				]
+			}
+		}
+	]
+}

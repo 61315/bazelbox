@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Bazel Build",
+            "type": "shell",
+            "command": "bazel",
+            "args": [
+                "build",
+                "${input:selectTarget}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "selectTarget",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "node",
+                "args": [
+                    "-e",
+                    "console.log(require('path').basename(process.cwd()) + ':all')"
+                ]
+            }
+        }
+    ]
+}
