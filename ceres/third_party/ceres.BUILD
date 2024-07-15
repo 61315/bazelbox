@@ -1,23 +1,3 @@
-# Copyright 2018 The Cartographer Authors
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Description:
-#   Ceres Solver is an open source C++ library for modeling and solving large,
-#   complicated optimization problems.
-
-licenses(["notice"])  # New BSD, portions MIT.
-
 CERES_DEFINES = [
     "CERES_USE_CXX11",
     "CERES_USE_EIGEN_SPARSE",
@@ -26,10 +6,18 @@ CERES_DEFINES = [
     "CERES_NO_CXSPARSE",
     "CERES_STD_UNORDERED_MAP",
     "CERES_USE_CXX11_THREADS",
-
-    # Use the internal mutex code. Not ideal, but it works.
     "CERES_HAVE_PTHREAD",
     "CERES_HAVE_RWLOCK",
+]
+
+MSVC_FLAGS = [
+    "/wd4018",  # 'signed/unsigned mismatch' 경고 무시
+    "/wd4267",  # 'conversion from size_t to int, possible loss of data' 경고 무시
+    "/wd4305",  # 'truncation from double to float' 경고 무시
+    "/wd4800",  # 'forcing value to bool true or false' 경고 무시
+    "/EHsc",    # 표준 C++ 예외 처리 모델 사용
+    "/bigobj",  # 큰 객체 파일 허용
+    "/D_USE_MATH_DEFINES",  # 수학 상수 정의 사용
 ]
 
 cc_library(
@@ -142,23 +130,34 @@ cc_library(
         "include/ceres/*.h",
         "include/ceres/internal/*.h",
     ]),
-    copts = [
-        "-fopenmp",
-        "-Wno-sign-compare",
-    ],
+    copts = select({
+        "@platforms//os:windows": ["/openmp"]  + MSVC_FLAGS,
+        "@platforms//os:macos": [
+            "-Xpreprocessor", "-fopenmp",
+            "-I/usr/local/opt/libomp/include",
+            "-Wno-sign-compare",
+        ],
+        "//conditions:default": ["-fopenmp", "-Wno-sign-compare"],
+    }),
     defines = CERES_DEFINES,
     includes = [
         "config",
         "include",
         "internal",
     ],
-    linkopts = [
-        "-lgomp",
-    ],
+    linkopts = select({
+        "@platforms//os:windows": [],
+        "@platforms//os:macos": [
+            "-L/usr/local/opt/libomp/lib",
+            "-lomp",
+        ],
+        "//conditions:default": ["-lgomp"],
+    }),
     linkstatic = 1,
     visibility = ["//visibility:public"],
     deps = [
-        "@com_google_glog//:glog",
+        "@glog//:glog",
+        # "@com_google_glog//:glog",
         "@org_tuxfamily_eigen//:eigen",
     ],
 )

@@ -11,3 +11,5 @@ git_override(
     remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
     commit = "a14ad3a64e7bf398ab48105aaa0348e032ac87f8",
 )
+
+bazel_dep(name = "glog", version = "0.7.1")
